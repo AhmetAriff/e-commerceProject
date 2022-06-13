@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 import Business.Abstract.UserService;
 import DataAccess.Abstracts.UserDao;
-import DataAccess.concredes.HibernateUserDao;
 import Entities.concredes.User;
 
 
@@ -15,8 +14,17 @@ import Entities.concredes.User;
 
 public class UserManager implements UserService {
 
+    private UserDao userDao;
+    
+
+    public UserManager(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
     @Override
     public void add(User user) {
+
+        
 
         Pattern p = Pattern.compile("\\b[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b");
         Matcher m = p.matcher("foobar@gmail.com");
@@ -38,11 +46,23 @@ public class UserManager implements UserService {
 
         else 
         {
-            UserDao userDao = new HibernateUserDao();
-            userDao.add(user);
-        }    
+            
+            this.userDao.add(user);
+        } 
+        
 
-    
+    }
+
+    @Override
+    public void verificationEmail(User user) {
+       System.out.println("dogrulama e postası gonderildi");
+        
+    }
+
+    @Override
+    public void verificationLink(User user) {
+       System.out.println("dogrulama linki gondelidi");
+        
     }
     
 }

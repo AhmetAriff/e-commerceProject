@@ -7,7 +7,7 @@ public class HibernateUserDao implements UserDao{
 
     @Override
     public void add(User user) {
-       System.out.println("User added to DB " +user.getFirstName());
+       System.out.println("User added to DB(with hibernate) " +user.getFirstName());
         
     }
     
